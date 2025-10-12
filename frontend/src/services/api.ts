@@ -1,10 +1,6 @@
 // API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost';
-const ISSUANCE_PORT = import.meta.env.VITE_ISSUANCE_PORT || '3001';
-const VERIFICATION_PORT = import.meta.env.VITE_VERIFICATION_PORT || '3002';
-
-const ISSUANCE_URL = `${API_BASE_URL}:${ISSUANCE_PORT}/api`;
-const VERIFICATION_URL = `${API_BASE_URL}:${VERIFICATION_PORT}/api`;
+const ISSUANCE_URL = import.meta.env.VITE_ISSUANCE_URL || 'http://localhost:3001/api';
+const VERIFICATION_URL = import.meta.env.VITE_VERIFICATION_URL || 'http://localhost:3002/api';
 
 // Types
 export interface Credential {
