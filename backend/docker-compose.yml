@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  issuance-service:
+    build:
+      context: ./issuance-service
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+    volumes:
+      - shared-data:/app/data
+    networks:
+      - kube-credential-network
+
+  verification-service:
+    build:
+      context: ./verification-service
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - SHARED_DB_PATH=/app/shared-data/issuance.db
+    volumes:
+      - verification-data:/app/data
+      - shared-data:/app/shared-data:ro
+    networks:
+      - kube-credential-network
+    depends_on:
+      - issuance-service
+
+volumes:
+  shared-data:
+  verification-data:
+
+networks:
+  kube-credential-network:
+    driver: bridge

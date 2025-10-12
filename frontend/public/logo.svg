@@ -1,0 +1,67 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="256" cy="256" r="240" fill="url(#gradient1)"/>
+  
+  <!-- Kubernetes Hexagon -->
+  <path d="M256 80 L380 150 L380 290 L256 360 L132 290 L132 150 Z" 
+        fill="url(#gradient2)" 
+        stroke="#ffffff" 
+        stroke-width="8"
+        opacity="0.3"/>
+  
+  <!-- Lock Body -->
+  <rect x="180" y="240" width="152" height="140" rx="12" 
+        fill="url(#gradient3)" 
+        stroke="#ffffff" 
+        stroke-width="6"/>
+  
+  <!-- Lock Shackle -->
+  <path d="M 200 240 L 200 180 Q 200 140 256 140 Q 312 140 312 180 L 312 240" 
+        fill="none" 
+        stroke="url(#gradient4)" 
+        stroke-width="20" 
+        stroke-linecap="round"/>
+  
+  <!-- Keyhole -->
+  <circle cx="256" cy="290" r="18" fill="#ffffff"/>
+  <rect x="246" y="290" width="20" height="40" rx="4" fill="#ffffff"/>
+  
+  <!-- Kubernetes Stars/Nodes -->
+  <circle cx="256" cy="120" r="8" fill="#FFD700"/>
+  <circle cx="340" cy="170" r="8" fill="#FFD700"/>
+  <circle cx="340" cy="270" r="8" fill="#FFD700"/>
+  <circle cx="256" cy="320" r="8" fill="#FFD700"/>
+  <circle cx="172" cy="270" r="8" fill="#FFD700"/>
+  <circle cx="172" cy="170" r="8" fill="#FFD700"/>
+  
+  <!-- Connecting Lines (subtle) -->
+  <line x1="256" y1="120" x2="340" y2="170" stroke="#4A90E2" stroke-width="2" opacity="0.4"/>
+  <line x1="340" y1="170" x2="340" y2="270" stroke="#4A90E2" stroke-width="2" opacity="0.4"/>
+  <line x1="340" y1="270" x2="256" y2="320" stroke="#4A90E2" stroke-width="2" opacity="0.4"/>
+  <line x1="256" y1="320" x2="172" y2="270" stroke="#4A90E2" stroke-width="2" opacity="0.4"/>
+  <line x1="172" y1="270" x2="172" y2="170" stroke="#4A90E2" stroke-width="2" opacity="0.4"/>
+  <line x1="172" y1="170" x2="256" y2="120" stroke="#4A90E2" stroke-width="2" opacity="0.4"/>
+  
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="gradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFA500;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="gradient4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFA500;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
