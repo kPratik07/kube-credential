@@ -46,4 +46,39 @@ router.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'healthy', service: 'issuance' });
 });
 
+router.post('/check', async (req: Request, res: Response) => {
+  try {
+    const credentialData = req.body;
+    
+    if (!credentialData || Object.keys(credentialData).length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Credential data is required'
+      });
+    }
+
+    const credential = await db.getCredential(credentialData);
+    
+    if (credential) {
+      return res.status(200).json({
+        success: true,
+        exists: true,
+        issuedBy: credential.issuedBy,
+        issuedAt: credential.issuedAt
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        exists: false
+      });
+    }
+  } catch (error) {
+    console.error('Error checking credential:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Internal server error'
+    });
+  }
+});
+
 export default router;

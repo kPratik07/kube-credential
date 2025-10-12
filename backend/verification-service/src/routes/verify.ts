@@ -18,37 +18,55 @@ router.post('/verify', async (req: Request, res: Response) => {
       });
     }
 
-    // Check if credential exists in shared volume (Kubernetes) or local path (Docker Compose)
-    // In production K8s, both services would share a persistent volume or use a shared database
-    const sharedDbPath = process.env.SHARED_DB_PATH || path.join(__dirname, '../../../issuance-service/data/issuance.db');
-    
+    // Call issuance service API to check if credential exists
+    const issuanceServiceUrl = process.env.ISSUANCE_SERVICE_URL || 'http://localhost:3001';
     let issuedCredential = null;
     
-    // Try to access shared issuance database
-    if (fs.existsSync(sharedDbPath)) {
-      try {
-        const initSqlJs = (await import('sql.js')).default;
-        const SQL = await initSqlJs();
-        const buffer = fs.readFileSync(sharedDbPath);
-        const issuanceDb = new SQL.Database(buffer);
-        
-        const credentialId = JSON.stringify(credentialData);
-        const stmt = issuanceDb.prepare('SELECT * FROM credentials WHERE id = ?');
-        stmt.bind([credentialId]);
-        const row = stmt.step() ? stmt.getAsObject() : null;
-        stmt.free();
-        issuanceDb.close();
-        
-        if (row) {
-          issuedCredential = {
-            id: row.id as string,
-            data: row.data as string,
-            issuedBy: row.issued_by as string,
-            issuedAt: row.issued_at as string
-          };
+    try {
+      const response = await fetch(`${issuanceServiceUrl}/api/check`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentialData),
+      });
+      
+      const data = await response.json() as { success: boolean; exists: boolean; issuedBy?: string; issuedAt?: string };
+      
+      if (data.success && data.exists) {
+        issuedCredential = {
+          issuedBy: data.issuedBy!,
+          issuedAt: data.issuedAt!
+        };
+      }
+    } catch (apiError) {
+      console.error('Error calling issuance service:', apiError);
+      // Fallback to local file check for Docker Compose/Kubernetes
+      const sharedDbPath = process.env.SHARED_DB_PATH || path.join(__dirname, '../../../issuance-service/data/issuance.db');
+      
+      if (fs.existsSync(sharedDbPath)) {
+        try {
+          const initSqlJs = (await import('sql.js')).default;
+          const SQL = await initSqlJs();
+          const buffer = fs.readFileSync(sharedDbPath);
+          const issuanceDb = new SQL.Database(buffer);
+          
+          const credentialId = JSON.stringify(credentialData);
+          const stmt = issuanceDb.prepare('SELECT * FROM credentials WHERE id = ?');
+          stmt.bind([credentialId]);
+          const row = stmt.step() ? stmt.getAsObject() : null;
+          stmt.free();
+          issuanceDb.close();
+          
+          if (row) {
+            issuedCredential = {
+              issuedBy: row.issued_by as string,
+              issuedAt: row.issued_at as string
+            };
+          }
+        } catch (dbError) {
+          console.error('Error accessing issuance database:', dbError);
         }
-      } catch (dbError) {
-        console.error('Error accessing issuance database:', dbError);
       }
     }
 

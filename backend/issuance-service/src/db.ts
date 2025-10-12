@@ -91,9 +91,12 @@ class IssuanceDatabase {
 
     this.save();
 
+    // Get student name from credential data
+    const studentName = credentialData.name || 'Unknown Student';
+
     return {
       success: true,
-      message: `credential issued by ${workerId}`,
+      message: `credential issued by ${studentName}`,
       worker: workerId,
       alreadyIssued: false
     };
