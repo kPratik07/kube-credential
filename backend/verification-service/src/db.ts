@@ -66,7 +66,7 @@ class VerificationDatabase {
     await this.ensureInitialized();
     if (!this.db) throw new Error('Database not initialized');
 
-    const workerId = os.hostname();
+    const workerId = process.env.WORKER_NAME || 'Pratik';
     const verifiedAt = new Date().toISOString();
 
     this.db.run(

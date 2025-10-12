@@ -65,7 +65,7 @@ class IssuanceDatabase {
     if (!this.db) throw new Error('Database not initialized');
 
     const credentialId = JSON.stringify(credentialData);
-    const workerId = os.hostname();
+    const workerId = process.env.WORKER_NAME || 'Pratik';
 
     // Check if credential already exists
     const stmt = this.db.prepare('SELECT * FROM credentials WHERE id = ?');

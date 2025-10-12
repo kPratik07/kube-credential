@@ -50,10 +50,10 @@ function Verify() {
     // Email validation
     if (!formData.email.trim()) {
       newErrors.email = 'Email address is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(formData.email.trim())) {
       newErrors.email = 'Please enter a valid email address';
-    } else if (!formData.email.trim().match(/\.(com|org|edu|net|gov|mil|co|io|in|uk|us|ca|au)$/i)) {
-      newErrors.email = 'Email must end with a valid domain (e.g., .com, .org, .edu)';
+    } else if (!formData.email.trim().match(/\.(com|org|edu|net|gov|mil|info|biz|io|in|uk|us|ca|au|de|fr|jp|cn)$/i)) {
+      newErrors.email = 'Email must end with a valid domain (e.g., .com, .org, .edu, .net)';
     } else if (formData.email.trim().length > 254) {
       newErrors.email = 'Email address is too long';
     }
