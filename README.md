@@ -204,14 +204,7 @@ kubectl get services
 MIT
 
 ## 👤 Author & Contact Information
-
-**Name:** Pratik Raj  
-**Email:** [Your Email Here]  
-**Contact Number:** [Your Phone Number Here]  
-**GitHub:** https://github.com/kPratik07  
-**LinkedIn:** https://www.linkedin.com/in/pratik-raj-543527214/
-
-Built with ❤️ for Zupple Technology Assignment
+Built with ❤️ By Pratik Raj 🚀
 ---
 
 ⭐ **Star this repo** if you find it helpful!
