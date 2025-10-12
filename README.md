@@ -212,16 +212,6 @@ MIT
 **LinkedIn:** https://www.linkedin.com/in/pratik-raj-543527214/
 
 Built with ❤️ for Zupple Technology Assignment
-
----
-
-## 📧 Submission Details
-
-This project is submitted as part of the Backend Developer Assignment for Zupple Technology.
-
-**Submission Email:** hrfs@zupple.technology  
-**Submission Date:** October 12, 2025
-
 ---
 
 ⭐ **Star this repo** if you find it helpful!
